@@ -20,6 +20,7 @@ body {
 
 h1, h2, h3 {
   font-family: 'Oswald';
+  font-weight: normal bold;
   color: #2a2a2a;
 }
 
@@ -135,4 +136,14 @@ aside img {
 
 footer {
   margin-top: 10px;
+}
+
+/* Added CSS */
+
+/* Source: https://stackoverflow.com/questions/19414856/how-can-i-make-all-images-of-different-height-and-width-the-same-via-css */
+.photogallery {
+  float:  left;
+  width:  100px;
+  height: 100px;
+  background-size: cover;
 }
