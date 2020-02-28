@@ -1,0 +1,134 @@
+
+/* COLOR PALETTE: */
+/* DARK-GREEN: ##61B893
+/* NEON-GREEN: #C4FFE6
+/* LIGHT-GREEN: #94FFD1
+/* RED: #D14C34
+/* PINK: #FFA494
+
+/* HEADER-RELATED STYLE */
+
+/* Header Container */
+.headerblock {
+    margin-left: 0px;
+    margin-right: 0px;
+    display: flex;  
+    background-color: #D14C34;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+    justify-content: space-around;
+}
+
+/* Testudo Sculpture */
+header img {
+    order: 2;
+    max-width: 140px;
+    border: #61B893 solid 1px;
+    border-radius: 4px;
+    display: block;
+}
+
+/* Heading in Header */
+header h1 {
+    color: white;
+    padding: 20px;
+    font-weight: normal bold;
+    font-family: 'Bebas Neue';
+    font-size: 50px; 
+    text-shadow: 3px 3px #61B893;
+    order: 1;
+}
+
+/* CONTENT-RELATED STYLE */
+
+body {
+    background-color: #C4FFE6;
+    margin: 0;
+    padding: 0;
+}
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    font-family: 'Oswald';
+    font-weight: 300; /* How to specify types of Oswald? */
+}
+
+.contentbody {
+    display: flex;
+    max-width: 960px;
+}
+
+.workhistory {
+    padding: 15px;
+    flex: 2;
+    margin: 10px;
+    border: #61B893 double;
+    border-radius: 4px;
+    background-color: white;
+}
+
+.workentries { 
+    display: flex;
+}
+
+.headshot {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 20px;
+
+}
+
+div.headshot img {
+    max-width: 100%;
+    border: #61B893 solid 1px;
+    border-radius: 4px;
+}
+
+#headshotcaption {
+    padding: 10px;
+    background-color: white;
+    width: inherit;
+}
+
+.roletitle {
+    font-style: italic;
+    font-family: 'Oswald';
+    font-weight: 400;
+}
+
+#rolestext {
+    font-family: 'Bebas Neue';
+    font-size: 35px;
+}
+
+@media screen and (max-width: 1000px){
+    .wrapper {
+        justify-content: center;
+    }
+
+    .contentbody {
+        justify-content: center;
+        flex-wrap: wrap-around;
+        flex-direction: column;
+
+    }
+
+    .headshot {
+        flex-direction: row;
+        margin-bottom: 10px; 
+        justify-content: space-evenly;
+    }
+
+    div.headshot img {
+        max-width: 50%;
+    }
+
+}
