@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Nicholas Stewart's Demo Page</title>
+    <title>Prof A's Demo Page</title>
     <link rel="stylesheet" type="text/css" href="./style.css" />
   </head>
 
   <body>
     <div class="container">
       <div class="wrapper">
-        <div class="header">Nicholas Stewart's Demo Page</div>
+        <div class="header">Prof A's Demo Page</div>
         <button class="button" onclick="clickMe()">
           Click me to make a change
         </button>
@@ -25,6 +25,11 @@
       </div>
     </div>
     <script>
+
+      /* Changing content of div with class "header" */
+      header_content = document.querySelector(".header");
+      header_content.innerHTML = "Nicholas Stewart's Lab 4";
+      
       function clickMe() {
         const content = document.querySelector(".content");
         content.innerHTML = "Hello world";
@@ -67,7 +72,6 @@
         
         /* Disabling the button after one click (Source: https://stackoverflow.com/questions/22456641/disable-non-clickable-an-html-button-in-javascript) */
         document.querySelector(".button").setAttribute('disabled','disabled');
-
       }
     </script>
   </body>
