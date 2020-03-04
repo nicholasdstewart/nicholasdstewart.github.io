@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Nicholas Stewart's Demo Page</title>
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="wrapper">
+        <div class="header">Nicholas Stewart's Demo Page</div>
+        <button class="button" onclick="clickMe()">
+          Click me to make a change
+        </button>
+        <div class="content">
+          <p>
+            Retro fam narwhal hoodie meggings viral bushwick yr chartreuse.
+            Chartreuse seitan banh mi selfies, woke ennui venmo craft beer. Air
+            plant tumeric retro DIY iPhone poutine. +1 gastropub chillwave,
+            cronut glossier pork belly tacos poke next level fanny pack vegan
+            jianbing lo-fi.
+          </p>
+        </div>
+        <div class="footer"></div>
+      </div>
+    </div>
+    <script>
+      function clickMe() {
+        const content = document.querySelector(".content");
+        content.innerHTML = "Hello world";
+
+        /* Creating the first new paragraph */
+        var para2 = document.createElement("p");
+        var para2_content = document.createTextNode("");
+        para2.appendChild(para2_content);
+
+        var currentDiv = document.querySelector(".content");
+        currentDiv.appendChild(para2);
+
+        para2.className = "paragraph_two";
+
+        /* Creating the second new paragraph */
+        var para3 = document.createElement("p");
+        var para3_content = document.createTextNode("");
+        para3.appendChild(para3_content);
+
+        currentDiv.appendChild(para3);
+
+        para3.className = "paragraph_three";
+
+        /* Finding the length of name (including whitespace) in characters */
+        let my_name = "Nicholas Stewart";
+        para2.innerHTML = "My name has " + my_name.length + " characters.";
+
+        /* Finding the third character in name */
+        let third_char = my_name[2];
+        para3.innerHTML = "The third character in my name is " + third_char.toUpperCase() + "<br>" + my_name.substr(my_name.length - 3, my_name.length - 1);
+
+        /* Finding total name length (not including whitespace) */
+        let first_name = my_name.substr(0, 8);
+        let last_name = my_name.substr(9, my_name.length - 1);
+        let total_name_length = first_name.length + last_name.length;
+
+        /* Adding total name length to the header */
+        const header_element = document.querySelector(".header");
+        header_element.innerHTML = header_element.innerHTML + " " + total_name_length;
+        
+        /* Disabling the button after one click (Source: https://stackoverflow.com/questions/22456641/disable-non-clickable-an-html-button-in-javascript) */
+        document.querySelector(".button").setAttribute('disabled','disabled');
+
+      }
+    </script>
+  </body>
+</html>
