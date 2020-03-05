@@ -76,7 +76,7 @@ h3 {
   margin: 25px 50px;
 }
 
-.button {
+.activate {
   background-color: #ffc477;
   -moz-border-radius: 11px;
   -webkit-border-radius: 11px;
@@ -92,12 +92,12 @@ h3 {
   text-shadow: 0px 1px 1px #cc9f52;
 }
 
-.button:hover {
+.activate:hover {
   background-color: coral;
   border: 2px solid rgb(216, 91, 46);
 }
 
-.button:active {
+.activate:active {
   position: relative;
   top: 1px;
 }
