@@ -281,10 +281,18 @@
     ]
     console.log("List of countries in the world", countries);
 
+    /* Question #1 */
     header_content = document.querySelector(".header");
     header_content.innerHTML = "Nicholas Stewart's List of Countries";
 
-    
+    /* Question #2 */
+    var ordered_list = document.createElement("ol");
+    var ordered_list_content = document.createTextNode("Placeholder Text");
+    ordered_list.appendChild(ordered_list_content);
+
+    var currentDiv = document.querySelector(".content");
+    currentDiv.appendChild(ordered_list)
+
 
   </script>
 </body>
