@@ -11,7 +11,7 @@
     <div class="wrapper">
       <div class="header">Test JSON page</div>
       <!-- <button class="button" onclick="loadData()">Load Some JSON</button> -->
-      <button class="activate">Click me to replace list
+      <button class="activate" onclick="select_countries()">Click me to replace list
         entries</button>
       <div class="content">
       </div>
@@ -265,22 +265,44 @@
       { "name": "Zambia", "code": "ZM" },
       { "name": "Zimbabwe", "code": "ZW" }
     ]
-    console.log("List of countries in the world", countries);
+    /*console.log("List of countries in the world", countries);*/
 
     /* Question #1 */
-    header_content = document.querySelector(".header");
+    const header_content = document.querySelector(".header");
     header_content.innerHTML = "Nicholas Stewart's List of Countries";
 
     /* Question #2 */
-    var ordered_list = document.createElement("ol");
-    var ordered_list_content = document.createTextNode("Placeholder Text");
-    ordered_list.appendChild(ordered_list_content);
+    const ordered_list = document.createElement("ol");
+    ordered_list.innerHTML = ""
+    /*ordered_list.appendChild(ordered_list_content);*/
 
-    var currentDiv = document.querySelector(".content");
+    const currentDiv = document.querySelector(".content");
     currentDiv.appendChild(ordered_list)
 
     /* Question #3 */
-    orderedList.className = "countries";
+    ordered_list.className = "countries";
+
+    /* Question #4 */
+    
+    let random_index = ""
+    let random_country_list = [];
+    function select_countries(){
+      random_country_list = [];
+      ordered_list.innerHTML = "";
+      for(i = 0; i < 25; i++){
+        random_index = Math.floor(Math.random() * countries.length);
+        random_country_list.push(countries[random_index]["name"]);
+      }
+
+      random_country_list = random_country_list.map(country_name => ordered_list.innerHTML = ordered_list.innerHTML + "<li>" + country_name + "</li>");
+      console.log(random_country_list);
+    }
+
+      
+    
+
+    /* note from class:
+    if you make onclick work only with JS, you also get .5 extra credit */
   </script>
 </body>
 
