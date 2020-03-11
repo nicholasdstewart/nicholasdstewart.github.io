@@ -291,11 +291,21 @@
       ordered_list.innerHTML = "";
       for(i = 0; i < 25; i++){
         random_index = Math.floor(Math.random() * countries.length);
-        random_country_list.push(countries[random_index]["name"]);
+        if(random_country_list.indexOf(countries[random_index]["name"]) > -1){
+          i = i - 1;
+          continue;
+        }
+        else{
+          random_country_list.push(countries[random_index]["name"]);
+        }
       }
 
+      /* Code used to identify duplicates (if any): */
+      /* 
+      let findDuplicates = arr => arr.filter((item, index) => arr.indexOf(item) != index);
+      console.log(findDuplicates(random_country_list));
+      */
       random_country_list = random_country_list.map(country_name => ordered_list.innerHTML = ordered_list.innerHTML + "<li>" + country_name + "</li>");
-      console.log(random_country_list);
     }
 
       
