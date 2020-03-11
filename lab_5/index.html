@@ -11,7 +11,7 @@
     <div class="wrapper">
       <div class="header">Test JSON page</div>
       <!-- <button class="button" onclick="loadData()">Load Some JSON</button> -->
-      <button class="activate" onclick="select_countries()">Click me to replace list
+      <button class="activate">Click me to replace list
         entries</button>
       <div class="content">
       </div>
@@ -304,6 +304,10 @@
      /* --- QUESTIONS #5 - #10 --- */
      /* -------------------------- */
 
+     /* Making onclick() work only with JS: */
+     button = document.querySelector("button");
+     button.onclick(select_countries);
+
     /* Function used to pick 25 random countries and apply corresponding styling: */
     function select_countries(){
       /* Resetting values of variables: */
@@ -347,9 +351,6 @@
         });
       console.log(unselected_countries);
     }
-    
-    /* note from class:
-    if you make onclick work only with JS, you also get .5 extra credit */
   </script>
 </body>
 
