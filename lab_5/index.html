@@ -286,8 +286,12 @@
     
     let random_index = ""
     let random_country_list = [];
+    let random_code_list = [];
+    let unselected_countries = [];
+    
     function select_countries(){
       random_country_list = [];
+      random_code_list = [];
       ordered_list.innerHTML = "";
       for(i = 0; i < 25; i++){
         random_index = Math.floor(Math.random() * countries.length);
@@ -297,6 +301,7 @@
         }
         else{
           random_country_list.push(countries[random_index]["name"]);
+          random_code_list.push(countries[random_index]["code"]);
         }
       }
 
@@ -305,9 +310,22 @@
       let findDuplicates = arr => arr.filter((item, index) => arr.indexOf(item) != index);
       console.log(findDuplicates(random_country_list));
       */
-      random_country_list = random_country_list.map(country_name => ordered_list.innerHTML = ordered_list.innerHTML + "<li>" + country_name + "</li>");
+      /*random_country_list = random_country_list.map(country_name => ordered_list.innerHTML = ordered_list.innerHTML + "<li>" + countries[random_index]["code"] + " " + country_name + "</li>");*/
+
+      /* Source for code for map function: https://stackoverflow.com/questions/22015684/how-do-i-zip-two-arrays-in-javascript (answer by 'tewathia')*/
+      random_country_list = random_country_list.map(function(country_name, k){
+        ordered_list.innerHTML  = ordered_list.innerHTML + "<li>" + "<span class = 'code_value'>" + random_code_list[k] + "</span>" + " " + "<span class = 'country_val'>" + country_name + "</span>" + "</li>"
+      })
+      
+      /* Source for code for forEach(): https://www.digitalocean.com/community/tutorials/how-to-modify-attributes-classes-and-styles-in-the-dom */
+      const code_span_content = document.querySelectorAll(".code_value");
+      const name_span_content = document.querySelectorAll(".country_val");
+      code_span_content.forEach(element => {element.style.fontWeight="bold"});
+      name_span_content.forEach(element => {element.style.fontWeight="normal"});
+
     }
 
+    
       
     
 
