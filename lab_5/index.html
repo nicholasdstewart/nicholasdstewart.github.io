@@ -265,34 +265,54 @@
       { "name": "Zambia", "code": "ZM" },
       { "name": "Zimbabwe", "code": "ZW" }
     ]
-    /*console.log("List of countries in the world", countries);*/
+    console.log("List of countries in the world", countries);
 
-    /* Question #1 */
+     /* --------------------*/
+     /* --- QUESTION #1 --- */
+     /* --------------------*/
+
     const header_content = document.querySelector(".header");
     header_content.innerHTML = "Nicholas Stewart's List of Countries";
 
-    /* Question #2 */
+     /* --------------------*/
+     /* --- QUESTION #2 --- */
+     /* --------------------*/
+
     const ordered_list = document.createElement("ol");
-    ordered_list.innerHTML = ""
-    /*ordered_list.appendChild(ordered_list_content);*/
+    ordered_list.innerHTML = "";
 
     const currentDiv = document.querySelector(".content");
     currentDiv.appendChild(ordered_list)
 
-    /* Question #3 */
+     /* --------------------*/
+     /* --- QUESTION #3 --- */
+     /* --------------------*/
+
     ordered_list.className = "countries";
 
-    /* Question #4 */
+    /* --------------------*/
+    /* --- QUESTION #4 --- */
+    /* --------------------*/
     
+    /* Declaring variables outside of the function: */
     let random_index = ""
     let random_country_list = [];
     let random_code_list = [];
-    let unselected_countries = [];
+    let all_countries = [];
     
+     /* -------------------------- */
+     /* --- QUESTIONS #5 - #10 --- */
+     /* -------------------------- */
+
+    /* Function used to pick 25 random countries and apply corresponding styling: */
     function select_countries(){
+      /* Resetting values of variables: */
       random_country_list = [];
+      all_countries = [];
       random_code_list = [];
       ordered_list.innerHTML = "";
+
+      /* For loop used to create two arrays for random country names and corresponding codes: */
       for(i = 0; i < 25; i++){
         random_index = Math.floor(Math.random() * countries.length);
         if(random_country_list.indexOf(countries[random_index]["name"]) > -1){
@@ -305,15 +325,8 @@
         }
       }
 
-      /* Code used to identify duplicates (if any): */
-      /* 
-      let findDuplicates = arr => arr.filter((item, index) => arr.indexOf(item) != index);
-      console.log(findDuplicates(random_country_list));
-      */
-      /*random_country_list = random_country_list.map(country_name => ordered_list.innerHTML = ordered_list.innerHTML + "<li>" + countries[random_index]["code"] + " " + country_name + "</li>");*/
-
       /* Source for code for map function: https://stackoverflow.com/questions/22015684/how-do-i-zip-two-arrays-in-javascript (answer by 'tewathia')*/
-      random_country_list = random_country_list.map(function(country_name, k){
+      random_country_list.map(function(country_name, k){
         ordered_list.innerHTML  = ordered_list.innerHTML + "<li>" + "<span class = 'code_value'>" + random_code_list[k] + "</span>" + " " + "<span class = 'country_val'>" + country_name + "</span>" + "</li>"
       })
       
@@ -323,12 +336,18 @@
       code_span_content.forEach(element => {element.style.fontWeight="bold"});
       name_span_content.forEach(element => {element.style.fontWeight="normal"});
 
+      /* For loop to create list of all country names: */
+      for(j = 0; j < countries.length; j++){
+        all_countries.push(countries[j]["name"]);
+      }
+
+      /* Creating list of unselected countries: */
+      unselected_countries = all_countries.filter(function(el) {
+        return random_country_list.indexOf(el) < 0;
+        });
+      console.log(unselected_countries);
     }
-
     
-      
-    
-
     /* note from class:
     if you make onclick work only with JS, you also get .5 extra credit */
   </script>
