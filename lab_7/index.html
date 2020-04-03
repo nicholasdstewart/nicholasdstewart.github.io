@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Maps Lab</title>
+    <link rel="stylesheet" type="text/css" href="./styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+      integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+      integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+      crossorigin=""
+    ></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="wrapper">
+        <div class="header">Frontend Libraries: Maps Lab</div>
+        <div class="content">
+          <div id="mapid"></div> 
+        </div>
+        <div class="footer">Make some markers work!</div>
+      </div>
+    </div>
+    <script>
+        const mymap = L.map('mapid').setView([38.9881, -76.9416], 13);
+
+        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: 'pk.eyJ1IjoibmljaG9sYXNkc3Rld2FydCIsImEiOiJjazhqaHF1d2owMmM1M2ZxNmE5ZjF0dHpuIn0.2OzyXmdy62C4ZZLJtCTI_w'
+        }).addTo(mymap);
+
+        /* Code Referenced: https://joshuafrazier.info/leaflet-basics/ */
+        const customPopup = 'Eppley Recreation Center';
+
+        var customOptions = {
+          'maxWidth': '500',
+          'className' : 'custom'
+        }
+
+        mark1 = L.marker([38.9881, -76.9414]).bindPopup(customPopup, customOptions).addTo(mymap).openPopup();
+
+        /* *********************************************************** */
+        /* Using the Fetch API to import the 'Food Inspection' dataset */
+        /* *********************************************************** */
+
+        fetch('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json')
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+
+            //console.log(data);
+
+            new_locations = [];
+            // Accokeek Academy Data:
+            const new_location1 = [data[2]['name'], data[2]['geocoded_column_1']['coordinates'][1], data[2]['geocoded_column_1']['coordinates'][0]];
+            
+            // Ledo Restaraunt (17th Avenue) Data:
+            const new_location2 = [data[42]['name'], data[42]['geocoded_column_1']['coordinates'][1], data[42]['geocoded_column_1']['coordinates'][0]];
+            
+            // Greenbelt Elementary School Data:
+            const new_location3 = [data[864]['name'], data[864]['geocoded_column_1']['coordinates'][1], data[864]['geocoded_column_1']['coordinates'][0]];
+
+            // Adding the locational data to a separate array:
+            new_locations.push(new_location1);
+            new_locations.push(new_location2);
+            new_locations.push(new_location3);
+          
+            // Creating markers and pop-ups for each location/establishment:
+            mark2 = L.marker([new_locations[0][1], new_locations[0][2]]).bindPopup(new_locations[0][0],customOptions).addTo(mymap);
+            mark3 = L.marker([new_locations[1][1], new_locations[0][2]]).bindPopup(new_locations[1][0],customOptions).addTo(mymap);
+            mark4 = L.marker([new_locations[2][1], new_locations[2][2]]).bindPopup(new_locations[2][0],customOptions).addTo(mymap);
+            
+          })
+        
+  
+        
+      
+
+        
+
+    </script>
+  </body>
+</html>
