@@ -10,20 +10,21 @@
         <div>
           <h1>HTML 1 Forms Lab</h1>
 
-          <form action = 'https://nameless-thicket-21836.herokuapp.com/lab', post = "post">
+          <form action = 'https://nameless-thicket-21836.herokuapp.com/lab', method = "post">
             <ul>
               <li>
                 <label for = "name">Name:</label>
-                <input type = "text" id = "name" name = "user_name">
+                <input type = "text" id = "name" name = "user_name" maxlength = "140">
               </li>
 
               <li>
                 <label for = "interests">Interests:</label>
-                <input type = "text" id="interests" name = "user_interests">
+                <textarea type = "text" id="interests" name = "user_interests", rows = "5", cols = "33">By default, this element is filled with this text.</textarea>
               </li>
 
               <li class = "button">
                 <button type="submit">Submit</button>
+                <!-- Message: "Success! You posted a form to the lab server."-->
               </li>
             </ul>
           </form>
