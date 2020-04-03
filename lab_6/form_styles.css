@@ -1,11 +1,16 @@
+body {
+    /* Setting the background color to light-gray:*/
+    background-color: #F0F1F0;
+    /* Changing the font of everything on the page (except input text):*/
+    font-family: sans-serif;
+}
+
 form {
     /* Center the form on the page */
     margin: 0 auto;
-    width: 400px;
+    width: 300px;
     /* Form outline */
     padding: 1em;
-    border: 1px solid #CCC;
-    border-radius: 1em;
   }
   
   ul {
@@ -17,19 +22,26 @@ form {
   form li + li {
     margin-top: 1em;
   }
+
+  input, label {
+    display: block;
+  }
+
+  li {
+    float: left; 
+    }
   
   label {
     /* Uniform size & alignment */
-    display: inline-block;
-    width: 90px;
+    width: 30px;
     text-align: right;
   }
-  
+
   input, 
   textarea {
     /* To make sure that all text fields have the same font settings
        By default, textareas have a monospace font */
-    font: 1em sans-serif;
+    font: 1em monospace;
   
     /* Uniform text field size */
     width: 300px;
@@ -37,6 +49,7 @@ form {
   
     /* Match form field borders */
     border: 1px solid #999;
+
   }
   
   input:focus, 
@@ -62,8 +75,31 @@ form {
     /* This extra margin represent roughly the same space as the space
        between the labels and their text fields */
     margin-left: .5em;
+    background-color: #FFCC82;
+    border-radius: 5px;
+    border-color: #F4C164;
+    border-width: 2px;
+    padding: 5px;
+    width: 80px;
+    height: 40px;
+    color: white;
+    text-shadow: gray .5px .5px;
   }
 
   textarea {
     height: 6em; /* takes padding into account */
+    box-shadow: 1px 1px 1px gray;
   }
+
+  h1 {
+      text-align: center;
+  }
+
+  label {
+      color: black;
+      font-style: bold;
+  }
+
+
+
+
