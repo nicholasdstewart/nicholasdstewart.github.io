@@ -65,14 +65,15 @@ h3 {
   padding: 0 25px;
 }
 
-.content {
+#chartContainer {
   background: #fff;
   border: 2px dotted #444;
   align-self: flex-start;
-  width: 85%;
+  width: 97%;
   padding: 10px;
   overflow-wrap: break-word;
-  margin: 25px 50px;
+  margin: 5px 5px;
+  height: 500px;
 }
 
 .activate {
