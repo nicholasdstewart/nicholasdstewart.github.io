@@ -21,8 +21,40 @@
         .then((data) => { // this is an explicit return. If I want my information to go further, I'll need to use the "return" keyword before the brackets close
           console.log(data);
           console.log(data.length); 
+          return data})
           // return data; // <- this will pass the data to the next "then" statement when I'm ready.
+        .then((data) => {
+          // Declaring some initial objects
+          const organized_establishments = [];
+
+          // The following lines create a set of establishment categories
+          let category_set = new Set();
+          for(i = 0; i < data.length; i++){
+            //console.log(data[i]["category"]);
+            category_set.add(data[i]["category"]);
+          }
+
+          let category_array = Array.from(category_set);
+
+          for(i = 0; i < category_array.length; i++){
+            inner_cat_obj = {"category": "", "establishments": [], "number of establishments": ""};
+            inner_cat_obj["category"] = category_array[i];
+            for(j = 0; j < data.length; j++){
+              if(data[j]["category"] == category_array[i]){
+                inner_cat_obj["establishments"].push(data[j]["name"]);
+              }
+            }
+            inner_cat_obj["number of establishments"] = inner_cat_obj["establishments"].length;
+            organized_establishments.push(inner_cat_obj);
+          }
+          //console.log(organized_establishments);
+          return organized_establishments;
         })
+        
+        .then((organized_establishments) => {
+          console.log(organized_establishments)
+        })
+        
     </script>
   </body>
 </html>
