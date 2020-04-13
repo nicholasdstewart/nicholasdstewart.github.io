@@ -35,6 +35,7 @@
           }
 
           let category_array = Array.from(category_set);
+          let sum = 0;
 
           for(i = 0; i < category_array.length; i++){
             inner_cat_obj = {label: "", "establishments": [], y: ""};
@@ -55,11 +56,21 @@
         .then((organized_establishments) => {
 
           window.onload = function () {
+              
+            CanvasJS.addColorSet("customColorSet",
+                [//colorSet Array
+
+                "#74B391",
+                "#99FFC8",
+                "#FFB98D",
+                "#507CB3",
+                "#80B9FF"                
+                ]);
 
             const chart = new CanvasJS.Chart("chartContainer", {
               animationEnabled: true,
-              color: "colorSet2",
-              theme: "light2", // "light1", "light2", "dark1", "dark2"
+              colorSet: "customColorSet",
+              theme: "dark2", // "light1", "light2", "dark1", "dark2"
               title:{
                 text: "Food-Providing Establishments in Prince George's County"
               },
@@ -69,14 +80,13 @@
               axisX: {
                 //title: "",
                 interval: 1,
-                labelAngle: 90
-              },
+                labelAngle: 90},
               data: [{        
-                type: "column",  
+                type: "column", 
                 //showInLegend: true, 
                 legendMarkerColor: "grey",
                 //legendText: "",
-                dataPoints: organized_establishments
+                dataPoints: organized_establishments,
               }]
             });
             chart.render();
@@ -84,6 +94,7 @@
             }
 
           console.log(organized_establishments);
+   
 
           // console.log(organized_establishments);
         })
