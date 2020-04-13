@@ -38,7 +38,8 @@
           let sum = 0;
 
           for(i = 0; i < category_array.length; i++){
-            inner_cat_obj = {label: "", "establishments": [], y: ""};
+            //inner_cat_obj = {label: "", "establishments": [], y: ""};
+            inner_cat_obj = {y:"", "establishments": [], label:""}
             inner_cat_obj.label = category_array[i];
             for(j = 0; j < data.length; j++){
               if(data[j]["category"] == category_array[i]){
@@ -67,31 +68,27 @@
                 "#80B9FF"                
                 ]);
 
-            const chart = new CanvasJS.Chart("chartContainer", {
-              animationEnabled: true,
-              colorSet: "customColorSet",
-              theme: "dark2", // "light1", "light2", "dark1", "dark2"
-              title:{
-                text: "Food-Providing Establishments in Prince George's County"
-              },
-              axisY: {
-                title: "Number of Establishments"
-              },
-              axisX: {
-                //title: "",
-                interval: 1,
-                labelAngle: 90},
-              data: [{        
-                type: "column", 
-                //showInLegend: true, 
-                legendMarkerColor: "grey",
-                //legendText: "",
-                dataPoints: organized_establishments,
-              }]
-            });
-            chart.render();
+                const chart = new CanvasJS.Chart("chartContainer", {
+                  animationEnabled: true,
+                  theme: 'dark2',
+                  colorSet: 'customColorSet',
+                  title:{
+                    text: "Food Sources in PG County",
+                    horizontalAlign: "left"
+                  },
+                  data: [{
+                    type: "doughnut",
+                    startAngle: 60,
+                    //innerRadius: 60,
+                    indexLabelFontSize: 17,
+                    indexLabel: "{label} - #percent%",
+                    toolTipContent: "<b>{label}:</b> {y} (#percent%)",
+                    dataPoints: organized_establishments,
+                  }]
+                });
+                chart.render();
 
-            }
+                }
 
           console.log(organized_establishments);
    
