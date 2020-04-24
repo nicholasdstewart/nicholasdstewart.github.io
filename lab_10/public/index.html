@@ -11,29 +11,46 @@
           <h1 class="header">POST and PUT lab - with Fetch</h1>
         </div>
         <div>
+
+          <!-- Code for FORM begins here (includes buttons) -->
           <form class="targetForm" id="labForm">
+
+            <!-- NAME Label and Input -->
             <label for="name">Name</label>
             <input type="text" id="name" name="name" />
+
+            <!-- INTERESTS Label and Input -->
             <label for="interests">Interests</label>
-            <textarea id="interests" name="interests" rows="5" cols="33">Default text says what?</textarea>
+            <textarea id="interests" name="interests" rows="5" cols="33">Add your interests here</textarea>
+
+            <!-- ZIP CODE Label and Input -->
             <label for="zipcode">Zip Code</label>
-            <textarea id="zipcode" name="zipcode" rows = "5" cols = "33">Type zip code here</textarea>
+            <textarea id="zipcode" name="zipcode" rows = "5" cols = "33">Add your zip code here</textarea>
             <br/>
+
+            <!-- Buttons -->
             <button id="formBtn">Submit</button>
             <br/>
             <button id="getBtn">Retrieve Data</button>
+
           </form>
+          
         </div>
       </div>
     </div>
     <script>
+
+      // ********************************************* //
+      // Function that sends form data to the back-end //
+      // ********************************************* //
       function sendForm(e) {
-        e.preventDefault(); // this prevents your page reloading on button click
+        e.preventDefault(); // this prevents the page reloading on button click
         const target = document.querySelector("#labForm");
         const btn = document.querySelector("#formBtn");
 
         const formToSend = new FormData(target); // creates new object with form data
 
+        // Using FETCH to send data to the back-end
         fetch("/api", {
           method: "PUT",
           headers: {
@@ -41,52 +58,49 @@
           },
           body: JSON.stringify(Object.fromEntries(formToSend)),
         })
-          //.then((data) => data.text()) // note: we didn't send JSON, so there's no JSON to get.
+        
           .then((data) => data.json())
           .then((jsonresponse) => {
-            console.log(jsonresponse["message"])
+            console.log(jsonresponse["message"]) // accesses the "message" key of the JSON response object
+            btn.setAttribute("disabled", true); // prevents button from being clickable again
           })
-          /*
-          .then((txtresponse) => {
-            console.log(txtresponse);
-            btn.setAttribute("disabled", true);
-            const br = document.createElement("br");
-            target.append(br);
-            target.append(`${txtresponse}`);
-          });
-          */
+    
       }
 
+      // ****************************************************** //
+      // Function that accesses old form data from the back-end //
+      // ****************************************************** //
       function getData(f) {
-        console.log('getData called')
-        f.preventDefault();
+        f.preventDefault(); // this prevents the page from reloading on button click
         const target = document.querySelector("#labForm");
+        const btn = document.querySelector("#getBtn");
         
-        
+        // Using FETCH to access data from the back-end
         fetch("/api", {
           method: "GET"
         })
-        .then((data) => data.json())
+        .then((data) => data.json()) 
         .then((jsonresponse) => {
-          //console.log(jsonresponse)
+          btn.setAttribute("disabled", true); // prevents button from being clickable again
 
-          const ol = document.createElement("ol");
-      
-          target.append(ol);
+          const ol = document.createElement("ol"); // creating new HTML element for ordered list
+          target.append(ol); // appending the ordered list to the form (form becomes the parent)
 
+          // Simple for loop to iterate through the list of parsed form entries
           for(i = 0; i < jsonresponse.length; i++){
-            //console.log(jsonresponse[i]["name"])
             
-            const li = document.createElement("li");
+            const li = document.createElement("li"); //  creating new HTML element for ordered list item
             li.innerHTML = jsonresponse[i]["name"];
-            ol.append(li);
+            ol.append(li); // appending the list item to the ordered list (ordered list becomes the parent)
+
           }
         })
         
       }
 
+      // Adding functionality to the buttons on the page:
       const formBtn = document.querySelector("#formBtn");
-      formBtn.addEventListener("click", sendForm);
+      formBtn.addEventListener("click", sendForm); 
 
       const getBtn = document.querySelector('#getBtn');
       getBtn.addEventListener("click", getData)

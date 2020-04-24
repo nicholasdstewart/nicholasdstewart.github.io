@@ -1,4 +1,6 @@
-// These are our required libraries to make the server work.
+// ***************************************** //
+// Required libraries for the server to work //
+// ***************************************** //
 
 import express from 'express';
 import fetch from 'node-fetch';
@@ -8,10 +10,10 @@ import sqlite3 from 'sqlite3';
 import { open } from 'sqlite';
 import writeUser from './libraries/writeuser';
 
-
+// Defining initial settings for the in-memory SQL database
 const dbSettings = {
-  filename: './tmp/database.db',
-  driver: sqlite3.Database
+  filename: './tmp/database.db', // defines the location of the database
+  driver: sqlite3.Database // defines the computer program that implements a protocol for a database connection
 }; 
 
 const app = express();
@@ -21,18 +23,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
 
-/*
-async function writeUser(username, settings) {
-  const db = await open(settings);
-  await db.exec("CREATE TABLE IF NOT EXISTS user (name)");
-  await db.exec('INSERT INTO user VALUES ("${username}")');
-  const result = await db.each('SELECT * FROM user');
-  console.log("Expected result", result);
-  return result;
-}
-*/
-
-
+// ************************************ //
+// NOTE: this function is from old code //
+// ************************************ //
 function processDataForFrontEnd(req, res) {
   const baseURL = ''; // Enter the URL for the data you would like to retrieve here
 
@@ -51,51 +44,53 @@ function processDataForFrontEnd(req, res) {
       });
 }
 
-// Syntax change - we don't want to repeat ourselves,
-// or we'll end up with spelling errors in our endpoints.
-// 
+// ********************************* //
+// Setting up the API for the server //
+// ********************************* //
 app.route('/api')
+
+  // GET REQUEST HANDLING BELOW: //
   .get((req, res) => {
-    //processDataForFrontEnd(req, res)
     (async()=> {
       const db = await open(dbSettings)
       const result = await db.all('SELECT * FROM user', (err) => {
         console.log('writeuser', err)
       });
-      console.log('Expected result', result);
+      //console.log('Expected result', result);
       res.json(result);
     })()
   })
+  // POST REQUEST HANDLING BELOW: //
   .post((req, res) => {
     console.log("/api post request", req.body);
-    if(!req.body.name){ // if the 'name' section of the form is not filled out
+    if(!req.body.name){ // if the 'name' section of the form is not filled out...
       console.log(req.body);
-      res.status('418').send('something went wrong, additionally i am a teapot')
+      res.status('204').send('The NAME section was not filled out.')
     } else {
-      writeUser(req.body.name, dbSettings)
+      writeUser(req.body.name, dbSettings) // calls an external function (writeuser.js)
       .then((result) => {
-        console.log('Here is the result', result);
+        //console.log('Here is the result', result);
         res.json(result);
         //res.send('your post request was successful'); // sends this back to the front-end
       })
     }
   })
+  // PUT REQUEST HANDLING BELOW: //
   .put((req, res) => {
     console.log("/api put request", req.body);
     if(!req.body.name){
       console.log(req.body);
-      res.status('418').send('something went wrong, additionally i am a teapot')
+      res.status('204').send('The NAME section was not filled out.')
     } else {
-      writeUser(req.body.name, dbSettings)
+      writeUser(req.body.name, dbSettings) // calls an external function (writeuser.js)
       .then((result) => {
-        console.log('Here is the result', result);
-        res.json({"success":true,"message":"success!"});
+        //console.log('Here is the result', result);
+        res.json({"success":true,"message":"Your PUT request was successful!"});
       })
-      //res.send('your put request was successful') // sends this back to the front-end
     }
   })
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}!`)
+  console.log(`The app is listening on port ${port}!`)
 });
 
