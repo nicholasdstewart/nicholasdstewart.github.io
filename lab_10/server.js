@@ -59,7 +59,9 @@ app.route('/api')
     //processDataForFrontEnd(req, res)
     (async()=> {
       const db = await open(dbSettings)
-      const result = await db.each('SELECT * FROM user');
+      const result = await db.all('SELECT * FROM user', (err) => {
+        console.log('writeuser', err)
+      });
       console.log('Expected result', result);
       res.json(result);
     })()

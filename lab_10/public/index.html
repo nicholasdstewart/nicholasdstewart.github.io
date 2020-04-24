@@ -57,11 +57,39 @@
           */
       }
 
+      function getData(f) {
+        console.log('getData called')
+        f.preventDefault();
+        const target = document.querySelector("#labForm");
+        
+        
+        fetch("/api", {
+          method: "GET"
+        })
+        .then((data) => data.json())
+        .then((jsonresponse) => {
+          //console.log(jsonresponse)
+
+          const ol = document.createElement("ol");
+      
+          target.append(ol);
+
+          for(i = 0; i < jsonresponse.length; i++){
+            //console.log(jsonresponse[i]["name"])
+            
+            const li = document.createElement("li");
+            li.innerHTML = jsonresponse[i]["name"];
+            ol.append(li);
+          }
+        })
+        
+      }
+
       const formBtn = document.querySelector("#formBtn");
       formBtn.addEventListener("click", sendForm);
 
-      //const getBtn = document.querySelector('#getBtn');
-      //getBtn.addEventListener("click", )
+      const getBtn = document.querySelector('#getBtn');
+      getBtn.addEventListener("click", getData)
     </script>
   </body>
 </html>
