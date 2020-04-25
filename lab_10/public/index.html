@@ -61,7 +61,12 @@
         
           .then((data) => data.json())
           .then((jsonresponse) => {
-            console.log(jsonresponse["message"]) // accesses the "message" key of the JSON response object
+
+            // Parsing JSON success message on the front end and displaying it in HTML
+            const msg = document.createElement("p")
+            msg.innerHTML = jsonresponse["message"]
+            target.append(msg)
+
             btn.setAttribute("disabled", true); // prevents button from being clickable again
           })
     
